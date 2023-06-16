@@ -1,23 +1,28 @@
 const robot = require('robotjs');
 //when chat gpt window expanded right when width changes (to the wider one, when window abt half of screen)
 
-robot.setMouseDelay(1000);
+robot.setMouseDelay(500);
 var inputCoord = [1700, 1300];
-var sendBtn = [2350, 1300];
+var sendBtn = [2372, 1311];
 var newchat = [1290, 150];
-var latestChat = [1277, 236];
+var latestChat = [1350, 243];
 //USE TAMPERMONKEY SCRIPT SO CTRL KEY = SAVE LATEST RESPONSE, OTHER KEY = PASTE RESPONSE
 setUpChat();
 makeNewChat();//NEED PARENTHESIS FOR COMMAND TO REGISTER IG
 askOtherChatResponse();
 goToNthChat(2);
 askOtherChatResponse();
+while (true){
+    goToLatestChat();
+    askOtherChatResponse();
+    goToNthChat(2);
+    askOtherChatResponse();
+}
 
 function setUpChat(){
-    
-    
-    keyLongTap("control");
     robot.moveMouse(inputCoord[0], inputCoord[1]);
+    robot.mouseClick("right");
+    keyLongTap("control");
     robot.mouseClick("right");
 
     keyLongTap("space");
@@ -29,7 +34,7 @@ function setUpChat(){
     pause(1000);
     robot.mouseToggle("up", "right");
     console.log("clicked");
-    pause(5000);
+    pause(15000);
     keyLongTap("shift");
 }
 
@@ -46,7 +51,7 @@ function askOtherChatResponse(){
     pause(1000);
     robot.mouseToggle("up", "right");
     console.log("clicked");
-    pause(5000);
+    pause(15000);
     keyLongTap("shift");
 }
 
@@ -88,7 +93,7 @@ function goToLatestChat(){
     pause(2000);
 }
 function goToNthChat(n){//only for chats made that day
-    robot.moveMouse(latestChat[0],latestChat[1]+((n-1)*35));
+    robot.moveMouse(latestChat[0],latestChat[1]+((n-1)*50));
     robot.mouseClick("right");
     pause(2000);
 }
